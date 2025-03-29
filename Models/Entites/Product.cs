@@ -1,0 +1,53 @@
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Models.Entites
+{
+    public class Product
+    {
+        [Key]
+        public int ID { get; set; }
+       
+        [MaxLength(50)]
+        [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public string Author { get; set; }
+        [Required]
+        public string ISBN { get; set; }
+
+        [Required]
+        [Display(Name="List Price")]
+        [Range(1,1000)]
+        public double ListPrice {  get; set; }
+        [Required]
+        [Display(Name ="price for 1-50")]
+        public double Price {  get; set; }
+        [Required]
+        [Display(Name = "price for 50+")]
+        [Range(1, 1000)]
+        public double Price50 {  get; set; }
+        [Required]
+        [Display(Name = "price for 100+")]
+        [Range(1, 1000)]
+        public double Price100 {  get; set; }
+
+        public int CategoryID {  get; set; }
+        [ForeignKey("CategoryID")]
+        [ValidateNever]
+        public Category Category {  get; set; }
+
+        
+        [ValidateNever]
+        public string? ImageUrl {  get; set; }
+
+    }
+}
